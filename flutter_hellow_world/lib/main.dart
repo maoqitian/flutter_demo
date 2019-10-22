@@ -29,10 +29,22 @@ class MyApp extends StatelessWidget {
         ),
         body: new Center(
           //child: new Text("hello,maoqitian! welcome to flutter world!!"),
-          child: new Text(new WordPair.random().asPascalCase),
+          //child: new Text(new WordPair.random().asPascalCase),
+          child: new RandomWords(),
         ),
       ),
     );
   }
 }
 
+class RandomWords extends StatefulWidget{
+  @override
+  createState() => new RandomWordsState();
+}
+class RandomWordsState extends State<RandomWords> {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Text(new WordPair.random().asPascalCase);
+  }
+}

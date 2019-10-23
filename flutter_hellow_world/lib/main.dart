@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget { //Stateless widgets是不可变的, 这意
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.cyan,
+        primaryColor: Colors.blueAccent,
       ),
      /* home: new Scaffold(
         appBar: new AppBar(
@@ -49,7 +49,7 @@ class RandomWordsState extends State<RandomWords> {
   //保存建议的单词对列表(变量以下划线（_）开头，在Dart语言中使用下划线前缀标识符，会强制其变成私有的)
   final _suggestions = <WordPair>[];
   //设置字体大小的变量
-  final _biggerFont=const TextStyle(fontSize: 18.0);
+  final _biggerFont = const TextStyle(fontSize: 18.0);
   // 保存喜欢单词组的集合 set 集合不允许值
   final _saved = new Set<WordPair>();
 

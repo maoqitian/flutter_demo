@@ -46,12 +46,12 @@ class RandomWords extends StatefulWidget{
 
 // 返回 显示单词对的ListView Widget
 class RandomWordsState extends State<RandomWords> {
-  //保存建议的单词对列表(变量以下划线（_）开头，在Dart语言中使用下划线前缀标识符，会强制其变成私有的)
-  final _suggestions = <WordPair>[];
+  //保存建议的单词对列表(变量以下划线（_）开头，在Dart语言中使用下划线前缀标识符，会强制其变成私有的)  final _suggestions = <WordPair>[];
+  final List _suggestions = new List<WordPair>();
   //设置字体大小的变量
   final _biggerFont = const TextStyle(fontSize: 18.0);
   // 保存喜欢单词组的集合 set 集合不允许值
-  final _saved = new Set<WordPair>();
+  final Set _saved = new Set<WordPair>();
 
   @override
   Widget build(BuildContext context) {

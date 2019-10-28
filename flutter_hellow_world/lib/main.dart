@@ -4,6 +4,7 @@ import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
+// StatelessWidget 无状态的widget
 class MyApp extends StatelessWidget { //Stateless widgets是不可变的, 这意味着它们的属性不能改变 - 所有的值都是最终的.
   // This widget is the root of your application.
   @override
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget { //Stateless widgets是不可变的, 这意
   }
 }
 
+//StatefulWidget 有状态的widget
 class RandomWords extends StatefulWidget{
   @override
   createState() => new RandomWordsState();
@@ -146,7 +148,7 @@ class RandomWordsState extends State<RandomWords> {
         isSaved ? Icons.favorite : Icons.favorite_border,
         color: isSaved ? Colors.deepOrange : null ,
       ),
-      onTap: (){  //???
+      onTap: (){  // 当用户点击 ListTile 击时， ListTile 会调用它的onTap回调
         setState(() { //调用setState() 会为State对象触发build()方法，从而导致对UI的更新
           if(isSaved){
              _saved.remove(suggestion);

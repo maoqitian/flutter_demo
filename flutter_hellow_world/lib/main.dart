@@ -1,4 +1,3 @@
-import 'package:english_words/english_words.dart' as prefix0;
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
@@ -12,29 +11,8 @@ class MyApp extends StatelessWidget { //Stateless widgets是不可变的, 这意
     return MaterialApp(
       //title: 'Welcome to Flutter',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primaryColor: Colors.blueAccent,
       ),
-     /* home: new Scaffold(
-        appBar: new AppBar(
-          title: new Center(
-            child: new Text("Welcome to Flutter"),
-          )
-        ),
-        body: new Center(
-          //child: new Text("hello,maoqitian! welcome to flutter world!!"),
-          //child: new Text(new WordPair.random().asPascalCase),
-          child: new RandomWords(),
-        ),
-      ),*/
      home: new RandomWords(),
     );
   }
@@ -52,8 +30,27 @@ class RandomWordsState extends State<RandomWords> {
   final List _suggestions = new List<WordPair>();
   //设置字体大小的变量
   final _biggerFont = const TextStyle(fontSize: 18.0);
-  // 保存喜欢单词组的集合 set 集合不允许值
+  // 保存喜欢单词组的集合 set 集合不允许值重复
   final Set _saved = new Set<WordPair>();
+
+  /// State 生命周期方法
+  @override
+  void initState() {
+    // state 初始化
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // 在 initState 之后调用，此时可以获取其他 State
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    // state 销毁
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +62,9 @@ class RandomWordsState extends State<RandomWords> {
           child: new Text('Flutter ListView'),
         ),
          // AppBar添加一个列表图标。当用户点击列表图标时，包含收藏夹的新路由页面入栈显示
-        actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.format_list_bulleted), onPressed: _pushSaved),// onPressed 点击事件
-        ],
+        //actions: <Widget>[
+          //new IconButton(icon: new Icon(Icons.format_list_bulleted), onPressed: _pushSaved),// onPressed 点击事件
+        //],
       ),
       body: _buildSuggestions(),
     );
@@ -125,7 +122,7 @@ class RandomWordsState extends State<RandomWords> {
           final index = i~/2;
           
           if(index >= _suggestions.length){
-            //  如果是建议列表中最后一个单词对 接着再生成10个单词对，然后添加到建议列表
+            //如果是建议单词列表中最后一个单词对 接着再生成10个单词对，然后添加到建议列表
             _suggestions.addAll(generateWordPairs().take(10));
           }
 

@@ -19,13 +19,10 @@ class MyApp extends StatelessWidget{
               child: new Text("Welcome to Flutter"),
             )
         ),
-        body: new Center(
-          child: DemoStateWidget(), //DemoStatelessWidget("无状态的Widget demo")
-        ),
+        body: DemoStatelessWidget("Flutter Hello World ! 无状态的Widget"), //DemoStatelessWidget("Flutter Hello World ! 无状态的Widget") DemoStateWidget()
       ),
     );
   }
-
 }
 
 //无状态 Widget
@@ -39,11 +36,19 @@ class DemoStatelessWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new Container(
-      color: Colors.white,
-        child: new Text(text ?? "这是一个无状态的Widget demo "),
+    return Container(
+      constraints: BoxConstraints.expand(
+        height: Theme.of(context).textTheme.display1.fontSize * 1.1 + 200.0,
+      ),
+      padding: const EdgeInsets.all(8.0),
+      color: Colors.blue[600],
+      alignment: Alignment.center,
+      child: Text(text,
+          style: Theme.of(context)
+              .textTheme
+              .display1
+              .copyWith(color: Colors.white)),
+      transform: Matrix4.rotationZ(0.1),
     );
   }
-
-
 }

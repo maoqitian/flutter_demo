@@ -62,9 +62,9 @@ class RandomWordsState extends State<RandomWords> {
           child: new Text('Flutter ListView'),
         ),
          // AppBar添加一个列表图标。当用户点击列表图标时，包含收藏夹的新路由页面入栈显示
-        //actions: <Widget>[
-          //new IconButton(icon: new Icon(Icons.format_list_bulleted), onPressed: _pushSaved),// onPressed 点击事件
-        //],
+        actions: <Widget>[
+          new IconButton(icon: new Icon(Icons.format_list_bulleted), onPressed: _pushSaved),// onPressed 点击事件
+        ],
       ),
       body: _buildSuggestions(),
     );

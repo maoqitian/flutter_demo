@@ -14,6 +14,30 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
+
+
+  //存放 底部导航栏 对应的每个 widget
+  List<Widget> _list = List();
+
+  //当前 tab
+  int _currentIndex = 0;
+
+  List tabData = [
+    {'text': '首页', 'icon': Icon(Icons.home)},
+    {'text': '知识体系', 'icon': Icon(Icons.assignment)},
+    {'text': '公众号', 'icon': Icon(Icons.chat)},
+    {'text': '导航', 'icon': Icon(Icons.navigation)},
+    {'text': '公众号', 'icon': Icon(Icons.android)},
+    //https://flutter-go.pub/api/isInfoOpen
+  ];
+
+  //BottomNavigationBar 数据
+  List<BottomNavigationBarItem> _myTabs = [];
+
+  ///遍历加入 tab widget 和 icon data
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(

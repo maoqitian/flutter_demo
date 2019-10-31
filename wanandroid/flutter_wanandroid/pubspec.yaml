@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   ## 路由框架
   fluro: ^1.5.1
+  # 本地存储、收藏功能
+  shared_preferences: ^0.4.3
 
 dev_dependencies:
   flutter_test:

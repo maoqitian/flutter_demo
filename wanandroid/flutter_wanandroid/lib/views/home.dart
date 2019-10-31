@@ -74,12 +74,16 @@ class _AppPageState extends State<AppPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-         title: new Center(
-           child: Text(appBarTitle),
-         ),
+        title: Text(appBarTitle,
+            style: new TextStyle(
+              color: Colors.white //设置字体颜色为白色
+            )
+        ),
+        centerTitle: true, //title 居中显示
         actions: <Widget>[
           IconButton(
               icon:  Icon(Icons.search),
+              color: Colors.white,
               onPressed: () {
                print('点击了搜索');
               })

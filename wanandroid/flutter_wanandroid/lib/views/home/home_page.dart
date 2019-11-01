@@ -99,12 +99,14 @@ class TabLayout extends StatelessWidget {
         labelPadding: EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
         indicatorSize: TabBarIndicatorSize.label,
         onTap: (index){
-          if(index == 1){
+          if(index == 0){
              DefaultTabController.of(context).animateTo(0);
-             print("切换最新博文");
-          }else if(index == 2){
+             print("点击切换最新博文");
+
+          }else if(index == 1){
             DefaultTabController.of(context).animateTo(0);
-            print("切换最新项目");
+            print("点击切换最新项目");
+
           }
         },
     );

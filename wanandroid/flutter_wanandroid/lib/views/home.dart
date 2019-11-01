@@ -73,22 +73,7 @@ class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      /*appBar: AppBar(
-        title: Text(appBarTitle,
-            style: new TextStyle(
-              color: Colors.white //设置字体颜色为白色
-            )
-        ),
-        centerTitle: true, //title 居中显示
-        actions: <Widget>[
-          IconButton(
-              icon:  Icon(Icons.search),
-              color: Colors.white,
-              onPressed: () {
-               print('点击了搜索');
-              })
-        ],
-      ),*/
+      appBar: renderAppBar(context, widget, _currentIndex),
       body: IndexedStack(
         index: _currentIndex,
         children: _list,
@@ -106,6 +91,27 @@ class _AppPageState extends State<AppPage> {
         fixedColor: Theme.of(context).primaryColor,
       ),
     );
+  }
+
+
+  //是否显示 app bar 如为首页则不显示 app bar , app bar 由首页的 HomePage 创建
+  renderAppBar(BuildContext context, Widget widget, int index) {
+   if(index != 0 ){
+      return AppBar(title: Text(appBarTitle,
+          style: new TextStyle(
+              color: Colors.white //设置字体颜色为白色
+          )
+      ),
+        centerTitle: true, //title 居中显示
+        actions: <Widget>[
+          IconButton(
+              icon:  Icon(Icons.search),
+              color: Colors.white,
+              onPressed: () {
+                print('点击了搜索');
+              })
+        ],);
+    }
   }
 
   buildSearchInput(BuildContext context) {

@@ -73,7 +73,7 @@ class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text(appBarTitle,
             style: new TextStyle(
               color: Colors.white //设置字体颜色为白色
@@ -88,7 +88,7 @@ class _AppPageState extends State<AppPage> {
                print('点击了搜索');
               })
         ],
-      ),
+      ),*/
       body: IndexedStack(
         index: _currentIndex,
         children: _list,

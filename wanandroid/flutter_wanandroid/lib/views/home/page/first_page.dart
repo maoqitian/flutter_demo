@@ -4,6 +4,10 @@
 /// email: maoqitian068@163.com
 /// des:  首页最新博文 page
 import 'package:flutter/material.dart';
+import 'package:flutter_wanandroid/api/Api.dart';
+import 'package:flutter_wanandroid/http/data_utils.dart';
+import 'package:flutter_wanandroid/http/http_utils.dart';
+import 'package:flutter_wanandroid/model/bannerdata.dart';
 
 
 class FirstPage extends StatefulWidget {
@@ -12,6 +16,20 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+
+
+  List <BannerData> _bannerList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    DataUtils.getBannerData().then((bannerList){
+       _bannerList = bannerList;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Container(

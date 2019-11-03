@@ -27,6 +27,11 @@ dependencies:
   fluro: ^1.5.1
   # 本地存储、收藏功能
   shared_preferences: ^0.4.3
+  # 网络请求
+  dio: ^3.0.2
+  path_provider: ^1.1.0
+  cookie_jar: ^1.0.0
+  dio_cookie_manager: 1.0.0
 
 dev_dependencies:
   flutter_test:

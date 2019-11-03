@@ -11,8 +11,6 @@ import 'package:flutter_wanandroid/views/home/page/first_page.dart';
 
 
 
-TabBar _tabBar;
-
 //页面标题和id对象
 class _Page {
   final String labelId;

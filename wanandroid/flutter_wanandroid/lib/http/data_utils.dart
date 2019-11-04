@@ -7,6 +7,7 @@
 
 import 'package:flutter_wanandroid/api/Api.dart';
 import 'package:flutter_wanandroid/http/http_utils.dart';
+import 'package:flutter_wanandroid/model/article_data.dart';
 import 'package:flutter_wanandroid/model/bannerdata.dart';
 
 
@@ -38,7 +39,22 @@ class DataUtils{
     }else{
       return [];
     }
+  }
 
+  // 首页文章列表
+  //方法：GET
+  //参数：页码，拼接在连接中，从0开始。
+  static Future<List<ArticleData>> getArticleData(int pageNum) async{
+    String path = '/article/list/$pageNum/json';
+    var response = await HttpUtils.get(Api.BASE_URL+path);
+    List<ArticleData> articleList = [];
+    if(response != null && response['errorCode'] == 0){
+      for (int i = 0; i < response['data'].length; i++) {
+        Map<String, dynamic> json = response['data'][i];
+        articleList.add(ArticleData.fromJson(json));
+      }
+    }
+    return articleList;
   }
 
 }

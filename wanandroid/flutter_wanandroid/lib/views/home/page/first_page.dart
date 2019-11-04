@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/api/Api.dart';
 import 'package:flutter_wanandroid/http/data_utils.dart';
 import 'package:flutter_wanandroid/http/http_utils.dart';
+import 'package:flutter_wanandroid/model/article_data.dart';
 import 'package:flutter_wanandroid/model/bannerdata.dart';
 
 
@@ -20,13 +21,16 @@ class _FirstPageState extends State<FirstPage> {
 
   List <BannerData> _bannerList = [];
 
+  List<ArticleData> _articleList = [];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     DataUtils.getBannerData().then((bannerList){
        _bannerList = bannerList;
     });
+     DataUtils.getArticleData(0).then((articleList){
+       _articleList = articleList;
+     });
   }
 
 

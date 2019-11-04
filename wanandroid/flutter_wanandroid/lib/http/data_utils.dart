@@ -49,8 +49,8 @@ class DataUtils{
     var response = await HttpUtils.get(Api.BASE_URL+path);
     List<ArticleData> articleList = [];
     if(response != null && response['errorCode'] == 0){
-      for (int i = 0; i < response['data'].length; i++) {
-        Map<String, dynamic> json = response['data'][i];
+      for (int i = 0; i < response['data']['datas'].length; i++) {
+        Map<String, dynamic> json = response['data']['datas'][i];
         articleList.add(ArticleData.fromJson(json));
       }
     }

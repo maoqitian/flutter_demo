@@ -27,15 +27,15 @@ class _FirstPageState extends State<FirstPage> {
 
   //  ListViewItem
   Widget makeCard(index,item){
-    var myTitle = '${item.title}';
-    var myUsername = item.author;
-    if(myUsername == ""){
-      myUsername = '${'👲'}: ${item.shareUser} ';
-    }else{
-      myUsername = '${'👲'}: ${item.author} ';
-    }
-    var codeUrl = '${item.link}';  //item 地址
-    return new ListViewItem(itemUrl:codeUrl,itemTitle: myTitle,data: myUsername);
+    //var myTitle = '${item.title}';
+    //var myUsername = item.author;
+    //if(myUsername == ""){
+      //myUsername = '${'👲'}: ${item.shareUser} ';
+    //}else{
+      //myUsername = '${'👲'}: ${item.author} ';
+    //}
+    //var codeUrl = '${item.link}';  //item
+    return new ListViewItem(articleData: item);
   }
 
 

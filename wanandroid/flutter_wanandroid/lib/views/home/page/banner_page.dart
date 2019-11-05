@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/home_banner.dart';
 import 'package:flutter_wanandroid/http/data_utils.dart';
 import 'package:flutter_wanandroid/model/bannerdata.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_wanandroid/routers/application.dart';
+import 'package:flutter_wanandroid/routers/routes.dart';
 
 
 class BannerPage extends StatefulWidget {
@@ -28,12 +29,11 @@ class _BannerPageState extends State<BannerPage> {
     loadData();
   }
 
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+  // banner 跳转 webViewPage
+  void _launchURL(BannerData bannerData)  {
+    Application.router.navigateTo(context,
+        '${Routes.webViewPage}?title=${Uri.encodeComponent(bannerData.title)}&url=${Uri.encodeComponent(bannerData.url)}');
+
   }
 
   @override
@@ -50,7 +50,7 @@ class _BannerPageState extends State<BannerPage> {
         _bannerList = list;
         if(_bannerList.length > 0 ){
           _list.add(HomeBanner(_bannerList,(bannerData){
-            _launchURL('${bannerData.url}');
+            _launchURL(bannerData);
           }));
         }
       });

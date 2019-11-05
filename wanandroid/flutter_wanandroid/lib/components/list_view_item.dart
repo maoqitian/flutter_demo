@@ -5,6 +5,7 @@ import 'package:fluro/fluro.dart';
 /// email: maoqitian068@163.com
 /// des:  
 import 'package:flutter/material.dart';
+import 'package:flutter_wanandroid/model/article_data.dart';
 import 'package:flutter_wanandroid/routers/application.dart';
 import 'package:flutter_wanandroid/routers/routes.dart';
 
@@ -13,8 +14,9 @@ class ListViewItem extends StatelessWidget {
   final String itemUrl;
   final String itemTitle;
   final String data;
+  final ArticleData articleData;
 
-  const ListViewItem({Key key, this.itemUrl, this.itemTitle, this.data})
+  const ListViewItem({Key key, this.itemUrl, this.itemTitle, this.data,this.articleData})
       :super(key:key);
 
 
@@ -26,19 +28,19 @@ class ListViewItem extends StatelessWidget {
       margin: new EdgeInsets.symmetric(horizontal: 10.0,vertical: 6.0),
       child: ListTile(
         onTap: (){
-          Application.router.navigateTo(context, '${Routes.webViewPage}?title=${Uri.encodeComponent(itemTitle)}&url=${Uri.encodeComponent(itemUrl)}');
+          Application.router.navigateTo(context, '${Routes.webViewPage}?title=${Uri.encodeComponent(articleData.title)}&url=${Uri.encodeComponent(articleData.link)}');
         },
-        title: Padding(
+        title: Padding( //文章标题
           padding: EdgeInsets.only(top: 10.0),
           child: Text(
-             itemTitle,
+             articleData.title,
              style: TextStyle(color: Colors.black, fontSize: 15.0),
            ),
         ),
-        subtitle: Row(
+        subtitle: Row( //作者名称
           children: <Widget>[
              Padding(
-               child: Text(data,
+               child: Text(articleData.author == ""? '👲 :  '+ articleData.shareUser : '👲 :  '+articleData.author,
                    style: TextStyle(color: Colors.black54, fontSize: 10.0)),
                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
              )

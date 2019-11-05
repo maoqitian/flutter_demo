@@ -17,7 +17,7 @@ class DataUtils{
 
   //获取首页banner 数据
 
-  static Future getBannerData() async{
+  static Future<List<BannerData>> getBannerData() async{
 
     var response = await HttpUtils.get(Api.BANNER_JSON);
 

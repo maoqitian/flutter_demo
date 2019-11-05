@@ -34,6 +34,8 @@ dependencies:
   dio_cookie_manager: 1.0.0
   # json 序列化
   json_annotation: ^3.0.0
+  # 打开网址
+  url_launcher: ^5.0.2
 
 dev_dependencies:
   flutter_test:

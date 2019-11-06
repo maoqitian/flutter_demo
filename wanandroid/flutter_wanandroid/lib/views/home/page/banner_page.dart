@@ -46,14 +46,16 @@ class _BannerPageState extends State<BannerPage> {
 
   void loadData() async{
     var list = await DataUtils.getBannerData();
-      setState(() {
-        _bannerList = list;
-        if(_bannerList.length > 0 ){
-          _list.add(HomeBanner(_bannerList,(bannerData){
-            _launchURL(bannerData);
-          }));
-        }
-      });
+      if(mounted){
+        setState(() {
+          _bannerList = list;
+          if(_bannerList.length > 0 ){
+            _list.add(HomeBanner(_bannerList,(bannerData){
+              _launchURL(bannerData);
+            }));
+          }
+        });
+      }
     }
 
 }

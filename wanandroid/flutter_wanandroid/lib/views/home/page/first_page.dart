@@ -46,10 +46,6 @@ class _FirstPageState extends State<FirstPage> {
              children: <Widget>[
                //轮播图 page
                new BannerPage(),
-               //Positioned(//方法二
-                 //  top: 10.0,
-                   //left: 0.0,
-                   //child: DisclaimerMsg(key:key,pWidget:this)
              ],),
         SizedBox(height: 1, child:Container(color: Theme.of(context).primaryColor)),
         SizedBox(height: 10),
@@ -90,7 +86,7 @@ class _FirstPageState extends State<FirstPage> {
     return Column(
       children: <Widget>[
         new Expanded(
-            child:listComp.ListRefresh(getIndexListData,makeCard,headerView)
+            child: listComp.ListRefresh(getIndexListData,makeCard,headerView)
         )
       ],
     );

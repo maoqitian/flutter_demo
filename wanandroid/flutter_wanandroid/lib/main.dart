@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
     // 注册 fluro routes
     final Router router = Router();
     Routes.configureRoutes(router);
-    // 设置环境变量
+    // 设置环境变量 router
     Application.router = router;
   }
 

@@ -40,6 +40,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # json 序列化
   build_runner: ^1.6.0
   json_serializable: ^3.2.0
 

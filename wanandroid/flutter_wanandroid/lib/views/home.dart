@@ -119,9 +119,11 @@ class _AppPageState extends State<AppPage> {
   }
   // BottomNavigationBar 点击执行方法
   void _itemTapped(int index) {
-     setState(() {
-        _currentIndex = index;
-        appBarTitle = tabData[index]['text'];
-     });
-  }
+     if(this.mounted){
+       setState(() {
+         _currentIndex = index;
+         appBarTitle = tabData[index]['text'];
+       });
+      }
+     }
 }

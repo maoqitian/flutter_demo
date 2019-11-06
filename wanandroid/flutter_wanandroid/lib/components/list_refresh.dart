@@ -61,7 +61,7 @@ class _ListRefreshState extends State<ListRefresh> {
         setState(() => isLoading = true);
       }
       //if(_hasMore){ // 还有数据可以拉新
-      List newEntries = await mokeHttpRequest();
+      List newEntries = await mokeHttpRequest(false);
       //if (newEntries.isEmpty) {
       _hasMore = (_pageIndex <= _pageTotal);
       if (this.mounted) {
@@ -78,10 +78,18 @@ class _ListRefreshState extends State<ListRefresh> {
     }
   }
 
-// 伪装吐出新数据
-  Future<List> mokeHttpRequest() async {
+  // 获取 数据
+  /// isRefresh 是否为下拉刷新
+  Future<List> mokeHttpRequest(bool isRefresh) async {
     if (widget.requestApi is Function) {
-      final listObj = await widget.requestApi({'pageIndex': _pageIndex});
+      Map listObj = new Map<String, dynamic>();
+      if(isRefresh){
+        //下拉刷新
+        listObj = await widget.requestApi({'pageIndex': 0});
+      }else{
+        //上拉加载更多
+        listObj = await widget.requestApi({'pageIndex': _pageIndex});
+      }
       _pageIndex = listObj['pageIndex'];
       _pageTotal = listObj['total'];
       return listObj['list'];
@@ -94,7 +102,7 @@ class _ListRefreshState extends State<ListRefresh> {
 // 下拉加载的事件，清空之前list内容，取前X个
 // 其实就是列表重置
   Future<Null> _handleRefresh() async {
-    List newEntries = await mokeHttpRequest();
+    List newEntries = await mokeHttpRequest(true);
     if (this.mounted) {
       setState(() {
         items.clear();
@@ -110,9 +118,9 @@ class _ListRefreshState extends State<ListRefresh> {
   Widget _buildLoadText() {
     return Container(
         child: Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: Center(
-        child: Text("数据没有更多了！！！"),
+         padding: const EdgeInsets.all(18.0),
+         child: Center(
+          child: Text("数据没有更多了！！！"),
       ),
     ));
   }
@@ -124,14 +132,14 @@ class _ListRefreshState extends State<ListRefresh> {
         padding: const EdgeInsets.all(8.0),
         child: new Center(
             child: Column(
-          children: <Widget>[
-            new Opacity(
+              children: <Widget>[
+             new Opacity(
               opacity: isLoading ? 1.0 : 0.0,
               child: new CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(Colors.blue)),
-            ),
-            SizedBox(height: 20.0),
-            Text(
+                  valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor)),
+             ),
+             SizedBox(height: 20.0),
+               Text(
               '稍等片刻更精彩...',
               style: TextStyle(fontSize: 14.0),
             )
@@ -171,7 +179,8 @@ class _ListRefreshState extends State<ListRefresh> {
             //print('itemsitemsitemsitems:${items[index].title}');
             //return ListTile(title: Text("Index${index}:${items[index].title}"));
             if (widget.renderItem is Function) {
-              return widget.renderItem(index, items[index]);
+              //index 减一 保持不会忽略 index = 0 的数据 但是也只显示19条数据
+              return widget.renderItem(index, items[index-1]);
             }
           }
           return null;

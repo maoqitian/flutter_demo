@@ -11,7 +11,6 @@ import 'package:flutter_wanandroid/http/http_utils.dart';
 import 'package:flutter_wanandroid/model/article/article_base_data.dart';
 import 'package:flutter_wanandroid/model/article/article_top_base_data.dart';
 import 'package:flutter_wanandroid/model/banner/banner_base_data.dart';
-import 'package:flutter_wanandroid/model/base_response.dart';
 import 'package:flutter_wanandroid/model/article/article_data.dart';
 import 'package:flutter_wanandroid/model/article/article_list_data.dart';
 import 'package:flutter_wanandroid/model/banner/bannerdata.dart';
@@ -34,7 +33,8 @@ class DataUtils{
   static Future<ArticleListData> getArticleData(int pageNum) async{
     String path = '/article/list/$pageNum/json';
     Response response = await HttpUtils.get(Api.BASE_URL+path);
-    return ArticleBaseData.fromJson(response.data).data;
+    ArticleBaseData articleBaseData = ArticleBaseData.fromJson(response.data);
+    return articleBaseData.data;
   }
 
   //置顶文章

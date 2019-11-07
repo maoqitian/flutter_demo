@@ -103,7 +103,7 @@ class _ListRefreshState extends State<ListRefresh> {
 // 其实就是列表重置
   Future<Null> _handleRefresh() async {
     List newEntries = await mokeHttpRequest(true);
-    if (this.mounted) {
+    if (this.mounted) { //mounted == true  保证 当前widget 状态可以更新
       setState(() {
         items.clear();
         items.addAll(newEntries);
@@ -176,8 +176,6 @@ class _ListRefreshState extends State<ListRefresh> {
             //return _buildLoadText();
             return _buildProgressIndicator();
           } else {
-            //print('itemsitemsitemsitems:${items[index].title}');
-            //return ListTile(title: Text("Index${index}:${items[index].title}"));
             if (widget.renderItem is Function) {
               //index 减一 保持不会忽略 index = 0 的数据 但是也只显示19条数据
               return widget.renderItem(index, items[index-1]);

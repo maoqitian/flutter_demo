@@ -8,7 +8,10 @@ part of 'article_top_base_data.dart';
 
 ArticleTopBaseData _$ArticleTopBaseDataFromJson(Map<String, dynamic> json) {
   return ArticleTopBaseData(
-    json['data'],
+    (json['data'] as List)
+        ?.map((e) =>
+            e == null ? null : ArticleData.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     json['errorCode'] as int,
     json['errorMsg'] as String,
   );

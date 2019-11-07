@@ -8,7 +8,9 @@ part of 'article_base_data.dart';
 
 ArticleBaseData _$ArticleBaseDataFromJson(Map<String, dynamic> json) {
   return ArticleBaseData(
-    json['data'],
+    json['data'] == null
+        ? null
+        : ArticleListData.fromJson(json['data'] as Map<String, dynamic>),
     json['errorCode'] as int,
     json['errorMsg'] as String,
   );

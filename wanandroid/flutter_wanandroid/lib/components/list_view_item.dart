@@ -27,7 +27,7 @@ class ListViewItem extends StatelessWidget {
       elevation: 4.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0,vertical: 6.0),
       child: ListTile(
-        onTap: (){
+        onTap: (){ //link 跳转  webview
           Application.router.navigateTo(context, '${Routes.webViewPage}?title=${Uri.encodeComponent(articleData.title)}&url=${Uri.encodeComponent(articleData.link)}');
         },
         title: Padding( //文章标题
@@ -56,9 +56,10 @@ class ListViewItem extends StatelessWidget {
         //加入 新 标签
         widget.add( _buildStrokeWidget('新',Colors.redAccent));
       }
-      /*if(articleData.tags){
+      if(articleData.tags.length > 0){
         //加入 tag 标签
-      }*/
+        widget.add( _buildStrokeWidget(articleData.tags[0].name,Colors.green));
+      }
       widget.add(new Icon(Icons.person,size: 20.0));
       widget.add( Padding(
         child: Text(articleData.author == ""? articleData.shareUser :articleData.author,

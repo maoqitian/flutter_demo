@@ -9,11 +9,18 @@ part 'article_top_base_data.g.dart';
 /// des:  文章 置顶 base 数据
 
 @JsonSerializable()
-class ArticleTopBaseData extends BaseResponseBody<List<ArticleData>>{
-  ArticleTopBaseData(data, int errorCode, String errorMsg) : super(data, errorCode, errorMsg);
+class ArticleTopBaseData {
+
+  List<ArticleData> data;
+  int errorCode;
+  String errorMsg;
+
+
+  ArticleTopBaseData(this.data, this.errorCode, this.errorMsg);
 
   factory ArticleTopBaseData.fromJson(Map<String, dynamic> json){
     return _$ArticleTopBaseDataFromJson(json);
   }
 
+  Map<String,dynamic> toJson() => _$ArticleTopBaseDataToJson(this);
 }

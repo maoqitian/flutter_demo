@@ -1,6 +1,4 @@
-import 'package:flutter_wanandroid/model/article/article_list_data.dart';
 import 'package:flutter_wanandroid/model/banner/bannerdata.dart';
-import 'package:flutter_wanandroid/model/base_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'banner_base_data.g.dart';
 /// Created with Android Studio.
@@ -10,8 +8,13 @@ part 'banner_base_data.g.dart';
 /// des:  文章 bass 数据
 
 @JsonSerializable()
-class BannerBaseData extends BaseResponseBody<List<BannerData>>{
-  BannerBaseData(data, int errorCode, String errorMsg) : super(data, errorCode, errorMsg);
+class BannerBaseData {
+  List<BannerData> data;
+  int errorCode;
+  String errorMsg;
+
+
+  BannerBaseData(this.data, this.errorCode, this.errorMsg);
 
   factory BannerBaseData.fromJson(Map<String, dynamic> json){
     return _$BannerBaseDataFromJson(json);

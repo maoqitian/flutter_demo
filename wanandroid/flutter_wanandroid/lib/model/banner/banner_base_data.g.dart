@@ -8,7 +8,10 @@ part of 'banner_base_data.dart';
 
 BannerBaseData _$BannerBaseDataFromJson(Map<String, dynamic> json) {
   return BannerBaseData(
-    json['data'],
+    (json['data'] as List)
+        ?.map((e) =>
+            e == null ? null : BannerData.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     json['errorCode'] as int,
     json['errorMsg'] as String,
   );

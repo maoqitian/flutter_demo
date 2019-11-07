@@ -8,8 +8,9 @@ import 'package:flutter_wanandroid/api/Api.dart';
 import 'package:flutter_wanandroid/components/list_view_item.dart';
 import 'package:flutter_wanandroid/http/data_utils.dart';
 import 'package:flutter_wanandroid/http/http_utils.dart';
-import 'package:flutter_wanandroid/model/article_data.dart';
+import 'package:flutter_wanandroid/model/article/article_data.dart';
 import 'package:flutter_wanandroid/components/list_refresh.dart' as listComp;
+import 'package:flutter_wanandroid/model/article/article_list_data.dart';
 import 'package:flutter_wanandroid/views/home/page/banner_page.dart';
 
 class FirstPage extends StatefulWidget {
@@ -53,13 +54,12 @@ class _FirstPageState extends State<FirstPage> {
     );
   }
 
-
+  //获取 文章 列表数据
   Future<Map> getIndexListData([Map<String, dynamic> params]) async {
-    var pageIndex = (params is Map) ? params['pageIndex'] : 0;
-    var  pageTotal = 0;
+   var pageIndex = (params is Map) ? params['pageIndex'] : 0;
+   List<ArticleData> articleList = [];
+    /*var  pageTotal = 0;
     String path = '/article/list/$pageIndex/json';
-
-    List<ArticleData> articleList = [];
     try{
     var response = await HttpUtils.get(Api.BASE_URL+path);
     if(response != null && response['errorCode'] == 0){
@@ -73,9 +73,14 @@ class _FirstPageState extends State<FirstPage> {
        }
       }
      }catch(e){
+    }*/
+    if(pageIndex == 0){
+
     }
-    pageIndex += 1;
-    Map<String, dynamic> result = {"list":articleList, 'total':pageTotal, 'pageIndex':pageIndex};
+    //正常列表数据
+    ArticleListData articleListData = await DataUtils.getArticleData(pageIndex);
+    //pageIndex += 1;
+    Map<String, dynamic> result = {"list":articleListData.datas, 'total':articleListData.pageCount, 'pageIndex':articleListData.curPage};
     return result;
   }
 

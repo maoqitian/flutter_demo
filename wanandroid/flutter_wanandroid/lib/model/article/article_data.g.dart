@@ -7,36 +7,41 @@ part of 'article_data.dart';
 // **************************************************************************
 
 ArticleData _$ArticleDataFromJson(Map<String, dynamic> json) {
-  return ArticleData()
-    ..apkLink = json['apkLink'] as String
-    ..author = json['author'] as String
-    ..chapterId = json['chapterId'] as int
-    ..chapterName = json['chapterName'] as String
-    ..collect = json['collect'] as bool
-    ..courseId = json['courseId'] as int
-    ..desc = json['desc'] as String
-    ..envelopePic = json['envelopePic'] as String
-    ..fresh = json['fresh'] as bool
-    ..id = json['id'] as int
-    ..link = json['link'] as String
-    ..niceDate = json['niceDate'] as String
-    ..origin = json['origin'] as String
-    ..prefix = json['prefix'] as String
-    ..projectLink = json['projectLink'] as String
-    ..publishTime = json['publishTime'] as int
-    ..superChapterId = json['superChapterId'] as int
-    ..superChapterName = json['superChapterName'] as String
-    ..title = json['title'] as String
-    ..type = json['type'] as int
-    ..userId = json['userId'] as int
-    ..visible = json['visible'] as int
-    ..zan = json['zan'] as int
-    ..audit = json['audit'] as int
-    ..tags = json['tags']
-    ..niceShareDate = json['niceShareDate'] as String
-    ..selfVisible = json['selfVisible'] as int
-    ..shareDate = json['shareDate'] as int
-    ..shareUser = json['shareUser'] as String;
+  return ArticleData(
+    json['apkLink'] as String,
+    json['author'] as String,
+    json['chapterId'] as int,
+    json['chapterName'] as String,
+    json['collect'] as bool,
+    json['courseId'] as int,
+    json['desc'] as String,
+    json['envelopePic'] as String,
+    json['fresh'] as bool,
+    json['id'] as int,
+    json['link'] as String,
+    json['niceDate'] as String,
+    json['origin'] as String,
+    json['prefix'] as String,
+    json['projectLink'] as String,
+    json['publishTime'] as int,
+    json['superChapterId'] as int,
+    json['superChapterName'] as String,
+    json['title'] as String,
+    json['type'] as int,
+    json['userId'] as int,
+    json['visible'] as int,
+    json['zan'] as int,
+    json['audit'] as int,
+    (json['tags'] as List)
+        ?.map((e) => e == null
+            ? null
+            : ArticleTagData.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    json['niceShareDate'] as String,
+    json['selfVisible'] as int,
+    json['shareDate'] as int,
+    json['shareUser'] as String,
+  );
 }
 
 Map<String, dynamic> _$ArticleDataToJson(ArticleData instance) =>

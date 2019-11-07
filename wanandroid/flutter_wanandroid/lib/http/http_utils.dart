@@ -27,7 +27,7 @@ class HttpUtils {
   // parasm : 请求参数
   // get 请求
   static Future get(String url, [Map<String, dynamic> params]) async {
-    var response ;
+    Response response ;
 
     Directory documentsDir = await getApplicationDocumentsDirectory();
     String documentsPath = documentsDir.path;
@@ -41,7 +41,7 @@ class HttpUtils {
     } else {
       response = await dio.get(url);
     }
-    return response.data;
+    return response;
 
   }
 
@@ -51,7 +51,7 @@ class HttpUtils {
   // parasm : 请求参数
   // post 请求
   static Future post(String url, Map<String, dynamic> params) async {
-    var response ;
+    Response response ;
 
     Directory documentsDir = await getApplicationDocumentsDirectory();
     String documentsPath = documentsDir.path;
@@ -62,7 +62,7 @@ class HttpUtils {
 
     response = await dio.get(url, queryParameters: params);
 
-    return response.data;
+    return response;
 
   }
 

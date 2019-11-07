@@ -1,3 +1,4 @@
+import 'package:flutter_wanandroid/model/article/article_tag_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'article_data.g.dart';
 /// Created with Android Studio.
@@ -63,14 +64,20 @@ class ArticleData{
    int visible;
    int zan;
    int audit;
-   Object tags;
+   List<ArticleTagData> tags;
    String niceShareDate;
    int selfVisible;
    int shareDate;
    String shareUser;
 
 
-   ArticleData();
+   ArticleData(this.apkLink, this.author, this.chapterId, this.chapterName,
+       this.collect, this.courseId, this.desc, this.envelopePic, this.fresh,
+       this.id, this.link, this.niceDate, this.origin, this.prefix,
+       this.projectLink, this.publishTime, this.superChapterId,
+       this.superChapterName, this.title, this.type, this.userId, this.visible,
+       this.zan, this.audit, this.tags, this.niceShareDate, this.selfVisible,
+       this.shareDate, this.shareUser);
 
    factory ArticleData.fromJson(Map<String, dynamic> json) => _$ArticleDataFromJson(json);
 

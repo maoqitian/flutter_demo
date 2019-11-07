@@ -4,9 +4,10 @@
 /// email: maoqitian068@163.com
 /// des:  首页 文章 list view item
 import 'package:flutter/material.dart';
-import 'package:flutter_wanandroid/model/article_data.dart';
+import 'package:flutter_wanandroid/model/article/article_data.dart';
 import 'package:flutter_wanandroid/routers/application.dart';
 import 'package:flutter_wanandroid/routers/routes.dart';
+import 'package:flutter_wanandroid/widget/stroke_widget.dart';
 
 class ListViewItem extends StatelessWidget {
 
@@ -36,24 +37,24 @@ class ListViewItem extends StatelessWidget {
              style: TextStyle(color: Colors.black, fontSize: 15.0),
            ),
         ),
-        subtitle: Row( //作者名称
+        subtitle: Row(
           children: _setArticleWidget(articleData)
         ),
         trailing:
-        Icon(Icons.favorite_border, color: Colors.grey, size: 25.0),
+        IconButton(icon: new Icon(Icons.favorite_border,color: Colors.grey, size: 25.0),onPressed: _clickCollection()),
       ),
     );
   }
-  //返回 list 集合
+  //返回 list 集合 显示文章信息
   List<Widget> _setArticleWidget(ArticleData articleData) {
       List <Widget> widget = [];
       if(1 == articleData.type){
         // 加入 置顶标签
-
+        widget.add(_buildStrokeWidget('置顶',Colors.redAccent));
       }
       if(articleData.fresh){
         //加入 新 标签
-
+        widget.add( _buildStrokeWidget('新',Colors.redAccent));
       }
       /*if(articleData.tags){
         //加入 tag 标签
@@ -70,6 +71,29 @@ class ListViewItem extends StatelessWidget {
         padding: EdgeInsets.only(top: 10.0, bottom: 10.0,left: 10.0),
       ));
     return widget;
+  }
+
+  // 创建 tag widget 方法
+  Widget _buildStrokeWidget(String text , Color color) {
+    return Padding(
+      child: StrokeWidget(
+          strokeWidth: 0.5,
+          edgeInsets: EdgeInsets.symmetric(horizontal: 2.0, vertical: 0.0),
+          color: color,
+          childWidget: Text(
+            text,
+            style: TextStyle(
+                fontSize: 11.0,
+                color: color,
+                fontWeight: FontWeight.w100),
+          )
+      ),
+      padding: EdgeInsets.only(right: 10.0),
+    );
+  }
+
+  _clickCollection() {
+    print("点击了收藏按钮");
   }
 }
 

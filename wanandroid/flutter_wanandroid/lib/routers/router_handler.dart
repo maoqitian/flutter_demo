@@ -1,6 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_wanandroid/views/home.dart';
+import 'package:flutter_wanandroid/views/app_page.dart';
 import 'package:flutter_wanandroid/views/web_page/web_view_page.dart';
 
 

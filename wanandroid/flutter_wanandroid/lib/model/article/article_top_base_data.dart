@@ -1,5 +1,4 @@
 import 'package:flutter_wanandroid/model/article/article_data.dart';
-import 'package:flutter_wanandroid/model/base_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'article_top_base_data.g.dart';
 /// Created with Android Studio.

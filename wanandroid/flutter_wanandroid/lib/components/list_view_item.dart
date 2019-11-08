@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/model/article/article_data.dart';
 import 'package:flutter_wanandroid/routers/application.dart';
 import 'package:flutter_wanandroid/routers/routes.dart';
+import 'package:flutter_wanandroid/utils/tool_utils.dart';
 import 'package:flutter_wanandroid/widget/stroke_widget.dart';
 
 class ListViewItem extends StatelessWidget {
@@ -33,7 +34,7 @@ class ListViewItem extends StatelessWidget {
         title: Padding( //文章标题
           padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
           child: Text(
-             articleData.title,
+             ToolUtils.signToStr(articleData.title),
              style: TextStyle(color: Colors.black, fontSize: 15.0),
            ),
         ),
@@ -41,7 +42,9 @@ class ListViewItem extends StatelessWidget {
           children: _setArticleWidget(articleData)
         ),
         trailing:
-        IconButton(icon: new Icon(Icons.favorite_border,color: Colors.grey, size: 25.0),onPressed: _clickCollection()),
+        IconButton(icon: new Icon(Icons.favorite_border,color: Colors.grey, size: 25.0),onPressed: (){
+          _clickCollection();
+        }),
       ),
     );
   }
@@ -93,7 +96,7 @@ class ListViewItem extends StatelessWidget {
     );
   }
 
-  _clickCollection() {
+  void _clickCollection() {
     print("点击了收藏按钮");
   }
 }

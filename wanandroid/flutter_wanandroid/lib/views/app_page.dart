@@ -2,7 +2,7 @@
 /// User: maoqitian
 /// Date: 2019/10/30 0030
 /// email: maoqitian068@163.com
-/// des: 首页
+/// des: 底层基础页面 BottomNavigationBar
 
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/search_input.dart';
@@ -11,6 +11,8 @@ import 'package:flutter_wanandroid/views/knowledge/knowledge_page.dart';
 import 'package:flutter_wanandroid/views/navigation/navigation_page.dart';
 import 'package:flutter_wanandroid/views/oa/oa_page.dart';
 import 'package:flutter_wanandroid/views/project/project_page.dart';
+
+import 'drawer/drawer_page.dart';
 
 
 
@@ -78,6 +80,10 @@ class _AppPageState extends State<AppPage> {
         index: _currentIndex,
         children: _list,
       ),
+      /// 侧边栏 抽屉
+      drawer: Drawer(
+        child: DrawerPage(),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: _myTabs,
         //高亮  被点击高亮
@@ -97,8 +103,26 @@ class _AppPageState extends State<AppPage> {
   //是否显示 app bar 如为首页则不显示 app bar , app bar 由首页的 HomePage 创建
   renderAppBar(BuildContext context, Widget widget, int index) {
    if(index != 0 ){
-      return AppBar(title: Text(appBarTitle,
-          style: new TextStyle(
+      return AppBar(
+        leading: Builder( builder: (context){
+          return IconButton(
+              icon: Container(
+                  child:  ClipOval(
+                    child: Image.network(
+                      'https://hbimg.huabanimg.com/9bfa0fad3b1284d652d370fa0a8155e1222c62c0bf9d-YjG0Vt_fw658',
+                      scale: 15.0,
+                    ),
+                  )
+              ),
+              onPressed: (){
+                /// 打开侧边栏 使用 Builder( builder: (context) 保证获取到 Scaffold  context 可以正常打开侧边栏
+                print("点击打开侧边栏");
+                Scaffold.of(context).openDrawer();
+              });
+           },
+        ),
+        title: Text(appBarTitle,
+            style: new TextStyle(
               color: Colors.white //设置字体颜色为白色
           )
       ),

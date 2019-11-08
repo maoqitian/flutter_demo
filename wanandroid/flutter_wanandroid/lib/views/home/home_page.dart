@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/main_app_bar.dart';
+import 'package:flutter_wanandroid/views/drawer/drawer_page.dart';
 import 'package:flutter_wanandroid/views/home/page/first_page.dart';
 
 /// Created with Android Studio.
@@ -93,6 +94,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ],
       ),
       body: TabBarViewLayout(),
+      //侧边栏
+      drawer: Drawer(
+        child: DrawerPage(),
+      ),
     );
   }
 
@@ -162,6 +167,4 @@ class TabBarViewLayout extends StatelessWidget {
     }
   }
 }
-
-
 

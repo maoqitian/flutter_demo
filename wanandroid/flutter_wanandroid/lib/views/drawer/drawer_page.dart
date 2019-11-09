@@ -116,6 +116,51 @@ class _DrawerPageState extends State<DrawerPage> {
             Navigator.pop(context);
           },
         ),
+        ListTile(
+          leading: Icon(
+            Icons.date_range,
+            size: 27.0,
+          ),
+          title: Text(
+            '我的积分',
+            style: textStyle,
+          ),
+          onTap: () {
+            //pushPage(context, SearchPage(), pageName: "SearchPage");
+            ///关闭侧边栏
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.settings,
+            size: 27.0,
+          ),
+          title: Text(
+            '设置',
+            style: textStyle,
+          ),
+          onTap: () {
+            //pushPage(context, SearchPage(), pageName: "SearchPage");
+            ///关闭侧边栏
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.book,
+            size: 27.0,
+          ),
+          title: Text(
+            'TODO',
+            style: textStyle,
+          ),
+          onTap: () {
+            //pushPage(context, SearchPage(), pageName: "SearchPage");
+            ///关闭侧边栏
+            Navigator.pop(context);
+          },
+        ),
       ],
     );
   }

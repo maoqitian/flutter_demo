@@ -97,7 +97,7 @@ class ListViewItem extends StatelessWidget {
   }
 
   void _clickCollection() {
-    print("点击了收藏按钮");
+    ToolUtils.ShowToast(msg:"点击了收藏按钮");
   }
 }
 

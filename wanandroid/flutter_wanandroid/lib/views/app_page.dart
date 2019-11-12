@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/search_input.dart';
+import 'package:flutter_wanandroid/utils/tool_utils.dart';
 import 'package:flutter_wanandroid/views/home/home_page.dart';
 import 'package:flutter_wanandroid/views/knowledge/knowledge_page.dart';
 import 'package:flutter_wanandroid/views/navigation/navigation_page.dart';
@@ -132,7 +133,7 @@ class _AppPageState extends State<AppPage> {
               icon:  Icon(Icons.search),
               color: Colors.white,
               onPressed: () {
-                print('点击了搜索');
+                ToolUtils.ShowToast(msg: '点击了搜索');
               })
         ],);
     }

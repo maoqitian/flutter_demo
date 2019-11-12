@@ -4,6 +4,7 @@
 /// email: maoqitian068@163.com
 /// des:  工具类
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class ToolUtils{
@@ -37,6 +38,19 @@ class ToolUtils{
         .replaceAll("</br>", "\n")
         .replaceAll("<br>", "\n")
     ;
+  }
+
+
+  static void ShowToast({String msg}){
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
   }
 
 }

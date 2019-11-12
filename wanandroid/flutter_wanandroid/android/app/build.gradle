@@ -20,6 +20,13 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+//签名 key 配置
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -46,11 +53,35 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {  //正式打包配置 秘钥配置
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+
+        /* debug{
+             storeFile file(DEBUG_KEY_PATH)
+             storePassword DEBUG_KEY_PASS
+             keyAlias DEBUG_ALIAS_NAME
+             keyPassword DEBUG_ALIAS_PASS
+         }*/
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            minifyEnabled false
+            debuggable false //关闭 debug
+            signingConfig signingConfigs.release
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true //开启 debug
+            minifyEnabled false //打断点不能开启混淆
+            //shrinkResources true
+            //zipAlignEnabled true
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }

@@ -17,6 +17,13 @@ class _DrawerPageState extends State<DrawerPage> {
   TextStyle(fontSize: 16, fontWeight: FontWeight.w300);
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new ListView(
       padding: EdgeInsets.zero,

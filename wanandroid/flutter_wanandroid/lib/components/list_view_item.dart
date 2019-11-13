@@ -67,12 +67,12 @@ class ListViewItem extends StatelessWidget {
       widget.add( Padding(
         child: Text(articleData.author == ""? articleData.shareUser :articleData.author,
             style: TextStyle(color: Colors.black54, fontSize: 10.0)),
-        padding: EdgeInsets.only(top: 10.0, bottom: 10.0,left: 10.0),
+        padding: EdgeInsets.only(top: 10.0, bottom: 10.0,left: 5.0),
       ));
       widget.add(Padding(
         child: Text('时间：'+articleData.niceDate ,
             style: TextStyle(color: Colors.black54, fontSize: 10.0)),
-        padding: EdgeInsets.only(top: 10.0, bottom: 10.0,left: 10.0),
+        padding: EdgeInsets.only(top: 10.0, bottom: 10.0,left: 5.0),
       ));
     return widget;
   }

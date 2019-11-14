@@ -6,12 +6,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/search_input.dart';
+import 'file:///D:/AndroidStudioWorkspace/flutter_demo/wanandroid/flutter_wanandroid/images/MyIcons.dart';
 import 'package:flutter_wanandroid/utils/tool_utils.dart';
 import 'package:flutter_wanandroid/views/home/home_page.dart';
 import 'package:flutter_wanandroid/views/knowledge/knowledge_page.dart';
 import 'package:flutter_wanandroid/views/navigation/navigation_page.dart';
 import 'package:flutter_wanandroid/views/oa/oa_page.dart';
 import 'package:flutter_wanandroid/views/project/project_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'drawer/drawer_page.dart';
 
@@ -35,8 +37,8 @@ class _AppPageState extends State<AppPage> {
 
   List tabData = [
     {'text': '首页', 'icon': Icon(Icons.home)},
-    {'text': '知识体系', 'icon': Icon(Icons.assignment)},
-    {'text': '公众号', 'icon': Icon(Icons.chat)},
+    {'text': '知识体系', 'icon': Icon(MyIcons.knowledge)},
+    {'text': '公众号', 'icon': Icon(MyIcons.wechat)},
     {'text': '导航', 'icon': Icon(Icons.navigation)},
     {'text': '项目', 'icon': Icon(Icons.android)},
   ];
@@ -73,33 +75,52 @@ class _AppPageState extends State<AppPage> {
     super.dispose();
   }
 
+  DateTime _lastPressedAt; //上次点击时间
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: renderAppBar(context, widget, _currentIndex),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _list,
-      ),
-      /// 侧边栏 抽屉
-      drawer: Drawer(
-        child: DrawerPage(),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: _myTabs,
-        //高亮  被点击高亮
-        currentIndex: _currentIndex,
-        //修改 页面
-        onTap: _itemTapped,
-        //shifting :按钮点击移动效果
-        //fixed：固定
-        type: BottomNavigationBarType.fixed,
-
-        fixedColor: Theme.of(context).primaryColor,
-      ),
+    return WillPopScope( ///通过WillPopScope 嵌套，可以用于监听处理 Android 返回键的逻辑。 WillPopScope 并不是监听返回按键，只是当前页面将要被pop时触发的回调
+        child: buildAppPage(),
+        onWillPop: () async{
+           return _doubleExitApp();
+        }
     );
   }
 
+  //双击返回 退出应用
+  bool _doubleExitApp(){
+    if (_lastPressedAt == null ||
+        DateTime.now().difference(_lastPressedAt) > Duration(seconds: 1)) {
+      ToolUtils.ShowToast(msg: "再点一次退出应用");
+      //两次点击间隔超过1秒则重新计时
+      _lastPressedAt = DateTime.now();
+      return false;
+    }
+    //应用关闭直接取消 Toast
+    Fluttertoast.cancel();
+    return true;
+}
+
+
+  ///如果返回 return new Future.value(false); popped 就不会被处理
+  ///如果返回 return new Future.value(true); popped 就会触发
+  ///这里可以通过 showDialog 弹出确定框，在返回时通过 Navigator.of(context).pop(true);决定是否退出
+  /// 单击提示退出
+  Future<bool> _dialogExitApp(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+          content: new Text("是否退出"),
+          actions: <Widget>[
+            new FlatButton(onPressed: () => Navigator.of(context).pop(false), child:  new Text("取消")),
+            new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: new Text("确定"))
+          ],
+        ));
+  }
 
   //是否显示 app bar 如为首页则不显示 app bar , app bar 由首页的 HomePage 创建
   renderAppBar(BuildContext context, Widget widget, int index) {
@@ -151,4 +172,31 @@ class _AppPageState extends State<AppPage> {
        });
       }
      }
+
+  /// 创建 app page 页面
+  Widget buildAppPage() {
+    return Scaffold(
+      appBar: renderAppBar(context, widget, _currentIndex),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _list,
+      ),
+      /// 侧边栏 抽屉
+      drawer: Drawer(
+        child: DrawerPage(),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: _myTabs,
+        //高亮  被点击高亮
+        currentIndex: _currentIndex,
+        //修改 页面
+        onTap: _itemTapped,
+        //shifting :按钮点击移动效果
+        //fixed：固定
+        type: BottomNavigationBarType.fixed,
+
+        fixedColor: Theme.of(context).primaryColor,
+      ),
+    );
+  }
 }

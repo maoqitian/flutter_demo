@@ -5,6 +5,7 @@
 /// des:  侧边栏 抽屉
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/single_theme_color.dart';
+import 'file:///D:/AndroidStudioWorkspace/flutter_demo/wanandroid/flutter_wanandroid/images/MyIcons.dart';
 
 
 const List<Map<String, dynamic>> defalutThemeColor = [
@@ -103,7 +104,7 @@ class _DrawerPageState extends State<DrawerPage> {
         ),
         ListTile(
           leading: Icon(
-            Icons.collections,
+            MyIcons.collection,
             size: 27.0,
           ),
           title: Text(
@@ -119,7 +120,7 @@ class _DrawerPageState extends State<DrawerPage> {
         new Divider(),
         ListTile(
           leading: Icon(
-            Icons.bookmark,
+            MyIcons.rank,
             size: 27.0,
           ),
           title: Text(
@@ -134,7 +135,7 @@ class _DrawerPageState extends State<DrawerPage> {
         ),
         ListTile(
           leading: Icon(
-            Icons.date_range,
+            MyIcons.coin,
             size: 27.0,
           ),
           title: Text(
@@ -149,7 +150,7 @@ class _DrawerPageState extends State<DrawerPage> {
         ),
         ListTile(
           leading: Icon(
-            Icons.subject,
+            Icons.color_lens,
             size: 27.0,
           ),
           title: Text(
@@ -179,7 +180,7 @@ class _DrawerPageState extends State<DrawerPage> {
         ),
         ListTile(
           leading: Icon(
-            Icons.book,
+            MyIcons.todo,
             size: 27.0,
           ),
           title: Text(

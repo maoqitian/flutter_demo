@@ -5,7 +5,7 @@
 /// des:  侧边栏 抽屉
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/single_theme_color.dart';
-import 'file:///D:/AndroidStudioWorkspace/flutter_demo/wanandroid/flutter_wanandroid/images/MyIcons.dart';
+import '../../common/MyIcons.dart';
 
 
 const List<Map<String, dynamic>> defalutThemeColor = [

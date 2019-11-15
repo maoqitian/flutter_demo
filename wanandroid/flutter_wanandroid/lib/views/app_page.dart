@@ -6,7 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/search_input.dart';
-import 'file:///D:/AndroidStudioWorkspace/flutter_demo/wanandroid/flutter_wanandroid/images/MyIcons.dart';
+import '../common/MyIcons.dart';
 import 'package:flutter_wanandroid/utils/tool_utils.dart';
 import 'package:flutter_wanandroid/views/home/home_page.dart';
 import 'package:flutter_wanandroid/views/knowledge/knowledge_page.dart';

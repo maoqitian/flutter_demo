@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hellow_world/DemoStateWidget.dart';
+import 'package:flutter_hellow_world/InheritedWidget/InheritedWidgetTestRoute.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget{
               child: new Text("Welcome to Flutter"),
             )
         ),
-        body: DemoStatelessWidget("Flutter Hello World ! 无状态的Widget"), //DemoStatelessWidget("Flutter Hello World ! 无状态的Widget") DemoStateWidget()
+        body: InheritedWidgetTestRoute()//DemoStatelessWidget("Flutter Hello World ! 无状态的Widget"), //DemoStatelessWidget("Flutter Hello World ! 无状态的Widget") DemoStateWidget()
       ),
     );
   }

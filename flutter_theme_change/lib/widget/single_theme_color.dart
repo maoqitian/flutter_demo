@@ -25,6 +25,7 @@ class SingleThemeColor extends StatelessWidget {
          print("点击了改变主题");
          //改变主题
          ChangeNotifierProvider.of<ThemeModel>(context).changeTheme(this.themeColor);
+         Navigator.pop(context);
       },
       child: new Column( // 竖直布局
         children: <Widget>[

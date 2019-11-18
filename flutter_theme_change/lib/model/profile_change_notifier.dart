@@ -14,6 +14,5 @@ class ThemeModel extends ChangeNotifier {
     this.settingThemeColor = themeColor;
     // 通知监听器（订阅者），重新构建InheritedProvider， 更新状态。
     notifyListeners();
-
   }
 }

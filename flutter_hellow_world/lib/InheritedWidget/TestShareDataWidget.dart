@@ -7,28 +7,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hellow_world/InheritedWidget/ShareDataWidget.dart';
 
 
-class TestWidget extends StatefulWidget {
+class TestShareDataWidget extends StatefulWidget {
   @override
-  _TestWidgetState createState() => _TestWidgetState();
+  _TestShareDataWidgetState createState() => _TestShareDataWidgetState();
 }
 
-class _TestWidgetState extends State<TestWidget> {
+class _TestShareDataWidgetState extends State<TestShareDataWidget> {
 
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
+    //上层 widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
     //如果build中没有依赖InheritedWidget，则此回调不会被调用。
-    print("Dependencies change");
+    print("didChangeDependencies");
   }
 
   @override
   Widget build(BuildContext context) {
-    //显示 ShareDataWidget 数据变化
+    //显示 ShareDataWidget 数据变化，如果build中没有依赖InheritedWidget，则此回调不会被调用。
     return Text(ShareDataWidget.of(context).data.toString());
-    //如果build中没有依赖InheritedWidget，则此回调不会被调用。
-    //return Text("66626");
+
   }
 }
 

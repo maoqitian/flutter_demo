@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_theme_change/model/profile_change_notifier.dart';
 import 'package:flutter_theme_change/provider/ChangeNotifierProvider.dart';
 import 'package:flutter_theme_change/provider/Consumer.dart';
+import 'package:flutter_theme_change/sp/shared_preferences_keys.dart';
 import 'package:flutter_theme_change/widget/single_theme_color.dart';
+import 'sp/shared_preferences.dart';
 
 const List<Map<String, dynamic>> defalutThemeColor = [
   {'cnName': 'Flutter蓝', 'value': 0xFF3391EA},
@@ -11,9 +13,16 @@ const List<Map<String, dynamic>> defalutThemeColor = [
   {'cnName': '骚烈黄', 'value': 0xFFFFC800},
   {'cnName': '早苗绿', 'value': 0xFFC0FF3E},
   {'cnName': '基佬紫', 'value': 0xFFBF3EFF},
+  {'cnName': '少女粉', 'value': 0xFFFF6EB4},
+  {'cnName': '淡雅灰', 'value': 0xFF949494},
 ];
 
-void main() => runApp(MyApp());
+SpUtil sp;
+
+void main() async{
+  sp = await SpUtil.getInstance();
+  return  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -30,11 +39,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  int themeColor =0;
+  
+  @override
+  void initState() {
+    super.initState();
+    themeColor = sp.getInt(SharedPreferencesKeys.themeColor);
+    if(themeColor == null ){
+      themeColor = 0xFF3391EA;//默认蓝色
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ChangeNotifierProvider<ThemeModel>(
-        data: ThemeModel(0xFF3391EA), //默认蓝色
+        data: ThemeModel(themeColor),
         child: Consumer<ThemeModel>(
           builder: (BuildContext context,themeModel){
             return MaterialApp(
@@ -79,8 +99,22 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 300,
               color: Colors.white,
               child: Wrap(
-                spacing: 5, //主轴上子控件的间距
-                runSpacing: 5, //交叉轴上子控件之间的间距
+                // 扩展方式，横向堆砌
+                  direction: Axis.horizontal,
+                  // 对齐方式
+                  alignment: WrapAlignment.center,
+                  // 主轴空隙间距
+                  spacing: 0,
+                  // run的对齐方式 开始位置
+                  runAlignment: WrapAlignment.start,
+                  // run空隙间距
+                  runSpacing: 10,
+                  // 交叉轴对齐方式
+                  crossAxisAlignment: WrapCrossAlignment.end,
+                  // 文本对齐方向
+                  textDirection: TextDirection.ltr,
+                  // 确定垂直放置子元素的顺序，以及如何在垂直方向上解释开始和结束。 默认down
+                  verticalDirection: VerticalDirection.down,
                 //mainAxisAlignment: MainAxisAlignment.spaceAround,
                 //mainAxisSize: MainAxisSize.max,//表示尽可能多的占用水平方向的空间，此时无论子widgets实际占用多少水平空间，Row的宽度始终等于水平方向的最大宽度
                 children: buildThemeColorChildren(),

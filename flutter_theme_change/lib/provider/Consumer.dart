@@ -16,12 +16,9 @@ class Consumer<T> extends StatelessWidget{
   Consumer({Key key,@required this.builder,this.child}):assert(builder !=null),super(key:key);
 
 
-
   @override
-  Widget build(BuildContext context) {
-    return builder(context,ChangeNotifierProvider.of<T>(context)); //自动获取Model
+  Widget build(BuildContext context) {  //默认绑定 注册依赖关系
+    return builder(context,ChangeNotifierProvider.of<T>(context)); //自动获取Model 获取更新的数据
   }
-
-
 
 }

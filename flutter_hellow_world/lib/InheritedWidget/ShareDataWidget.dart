@@ -15,7 +15,7 @@ class ShareDataWidget extends InheritedWidget  {
       :super(child:child);
 
 
-  //定义一个便捷方法，方便子树中的widget获取共享数据
+  // 子树中的widget获取共享数据 方法
   static ShareDataWidget of(BuildContext context){
     //return context.inheritFromWidgetOfExactType(ShareDataWidget);
     //使用 ancestorInheritedElementForWidgetOfExactType 方法当数据变化则不会调用 子widget 的didChangeDependencies 方法
@@ -23,12 +23,10 @@ class ShareDataWidget extends InheritedWidget  {
   }
 
 
-  //该回调决定当data发生变化时，是否通知子树中依赖data的Widget
+  //继承 InheritedWidget 实现的方法 返回值 决定当data发生变化时，是否通知子树中依赖data的Widget 更新数据
   @override
   bool updateShouldNotify(ShareDataWidget oldWidget) {
-    //如果返回true，则子树中依赖(build函数中有调用)本widget
-    //的子widget的`state.didChangeDependencies`会被调用
+    //如果返回true，则子树中依赖(build函数中有调用)本widget的子widget的`state.didChangeDependencies`会被调用
     return oldWidget.data != data;
   }
-
 }

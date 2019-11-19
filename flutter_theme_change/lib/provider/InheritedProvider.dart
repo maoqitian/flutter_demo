@@ -2,7 +2,7 @@
 /// User: maoqitian
 /// Date: 2019-11-17
 /// email: maoqitian068@163.com
-/// des:  保存需要共享的数据InheritedWidget
+/// des:  实现InheritedWidget  保存需要共享的数据InheritedWidget
 
 import 'package:flutter/material.dart';
 

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_theme_change/model/profile_change_notifier.dart';
 
 import 'package:flutter_theme_change/provider/ChangeNotifierProvider.dart';
+import 'package:flutter_theme_change/sp/shared_preferences.dart';
+import 'package:flutter_theme_change/sp/shared_preferences_keys.dart';
 
 
 
@@ -21,10 +23,11 @@ class SingleThemeColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () async{
          print("点击了改变主题");
          //改变主题
-         ChangeNotifierProvider.of<ThemeModel>(context).changeTheme(this.themeColor);
+         ChangeNotifierProvider.of<ThemeModel>(context,listen: false).changeTheme(this.themeColor);
+         await SpUtil.getInstance()..putInt(SharedPreferencesKeys.themeColor, this.themeColor);
          Navigator.pop(context);
       },
       child: new Column( // 竖直布局

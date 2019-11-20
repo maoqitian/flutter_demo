@@ -8,5 +8,7 @@ class SharedPreferencesKeys {
   ///  
   /// }]
   static String searchHistory = 'searchHistory';
+
+  static String themeColor = 'ThemeColor';
 }
 

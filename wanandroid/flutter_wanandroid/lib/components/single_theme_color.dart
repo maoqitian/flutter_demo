@@ -4,7 +4,11 @@
 /// email: maoqitian068@163.com
 /// des:  主题颜色 圆形 + 文字 widget
 import 'package:flutter/material.dart';
+import 'package:flutter_wanandroid/common/provider/profile_change_notifier.dart';
+import 'package:flutter_wanandroid/resource/shared_preferences_keys.dart';
+import 'package:flutter_wanandroid/utils/shared_preferences.dart';
 import 'package:flutter_wanandroid/utils/tool_utils.dart';
+import 'package:provider/provider.dart';
 
 
 class SingleThemeColor extends StatelessWidget {
@@ -18,8 +22,11 @@ class SingleThemeColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-         ToolUtils.ShowToast(msg: "点击了颜色 "+colorName);
+      onTap: ()async{
+         ToolUtils.ShowToast(msg: "改变主题颜色为"+colorName);
+         Provider.of<ThemeModel>(context,listen: false).changeTheme(this.themeColor);
+         await SpUtil.getInstance()..putInt(SharedPreferencesKeys.themeColor, this.themeColor);
+         Navigator.pop(context);
       },
       child: new Column( // 竖直布局
         children: <Widget>[

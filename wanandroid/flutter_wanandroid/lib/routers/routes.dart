@@ -8,6 +8,7 @@ class Routes {
 
   static String root = "/";
   static String home = "/home_page";
+  static String login = "/login_page";
 
   static String webViewPage = '/web-view-page';
 
@@ -20,6 +21,7 @@ class Routes {
 
     /// 第一个参数是路由地址，第二个参数是页面跳转和传参，第三个参数是默认的转场动画
     router.define(root, handler: homeHandler);
+    router.define(login, handler: loginHandler);
     router.define(webViewPage, handler: webViewPageHand);
   }
 

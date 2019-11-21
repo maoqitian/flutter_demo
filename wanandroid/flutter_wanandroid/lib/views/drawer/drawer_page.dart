@@ -15,6 +15,8 @@ const List<Map<String, dynamic>> defalutThemeColor = [
   {'cnName': '骚烈黄', 'value': 0xFFFFC800},
   {'cnName': '早苗绿', 'value': 0xFFC0FF3E},
   {'cnName': '基佬紫', 'value': 0xFFBF3EFF},
+  {'cnName': '少女粉', 'value': 0xFFFF6EB4},
+  {'cnName': '淡雅灰', 'value': 0xFF949494}
 ];
 
 class DrawerPage extends StatefulWidget {
@@ -204,16 +206,51 @@ class _DrawerPageState extends State<DrawerPage> {
           return Dialog(
             child: Container(
                //symmetric({ vertical, horizontal })：用于设置对称方向的填
-               padding: const EdgeInsets.symmetric(vertical: 20.0),
+               padding: const EdgeInsets.symmetric(vertical: 10.0),
                height: 300,
                color: Colors.white,
-               child: Wrap(
-                 spacing: 5, //主轴上子控件的间距
-                 runSpacing: 5, //交叉轴上子控件之间的间距
-                 //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                 //mainAxisSize: MainAxisSize.max,//表示尽可能多的占用水平方向的空间，此时无论子widgets实际占用多少水平空间，Row的宽度始终等于水平方向的最大宽度
-                 children: buildThemeColorChildren(),
-               ),
+               child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                     Center(
+                        heightFactor: 2.0,
+                        child:Text("主题切换"),
+                      ),
+                    Wrap(
+                      spacing: 10, //主轴上子控件的间距
+                      runSpacing: 10, //交叉轴上子控件之间的间距
+                      // 扩展方式，横向堆砌
+                      direction: Axis.horizontal,
+                      // 对齐方式
+                      alignment: WrapAlignment.start,
+                      // run的对齐方式 开始位置
+                      runAlignment: WrapAlignment.start,
+                      // 交叉轴对齐方式
+                      crossAxisAlignment: WrapCrossAlignment.end,
+                      // 文本对齐方向
+                      textDirection: TextDirection.ltr,
+                      // 确定垂直放置子元素的顺序，以及如何在垂直方向上解释开始和结束。 默认down
+                      verticalDirection: VerticalDirection.down,
+                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //mainAxisSize: MainAxisSize.max,//表示尽可能多的占用水平方向的空间，此时无论子widgets实际占用多少水平空间，Row的宽度始终等于水平方向的最大宽度
+                      children: buildThemeColorChildren(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: RaisedButton(
+                        textColor: Colors.white,
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                            "关闭"
+                        ),
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                        padding: const EdgeInsets.all(5.0),
+                      ),
+                    ),
+                  ],
+               )
             ),
           );
         }

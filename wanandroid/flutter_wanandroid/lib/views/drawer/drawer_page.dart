@@ -5,6 +5,8 @@
 /// des:  侧边栏 抽屉
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/components/single_theme_color.dart';
+import 'package:flutter_wanandroid/routers/application.dart';
+import 'package:flutter_wanandroid/routers/routes.dart';
 import '../../common/MyIcons.dart';
 
 
@@ -50,14 +52,21 @@ class _DrawerPageState extends State<DrawerPage> {
                style: TextStyle(fontSize: 15.0),
              ),
            ),
-           decoration: BoxDecoration(
+           currentAccountPicture: CircleAvatar(
+               backgroundImage: NetworkImage('https://hbimg.huabanimg.com/9bfa0fad3b1284d652d370fa0a8155e1222c62c0bf9d-YjG0Vt_fw658'),
+           ),
+           onDetailsPressed: (){
+              print("点击跳转用户中心或者登录页");
+              Application.router.navigateTo(context,Routes.login);
+           },
+           /*decoration: BoxDecoration(
              image: new DecorationImage(
                fit: BoxFit.cover,
                image: new NetworkImage(
                    //hasLogin ? widget.userInfo.avatarPic :
                    'https://hbimg.huabanimg.com/9bfa0fad3b1284d652d370fa0a8155e1222c62c0bf9d-YjG0Vt_fw658'),
              ),
-           ),
+           ),*/
         ),
         ListTile(
           leading: Icon(

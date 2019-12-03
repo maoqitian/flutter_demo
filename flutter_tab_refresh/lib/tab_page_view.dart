@@ -45,7 +45,7 @@ class _TabPageViewState extends State<TabPageView> {
       await Future.delayed(Duration(seconds: 3), () {
         return [];
       });
-      return  {"list":articleAllList, 'total':3, 'pageIndex':pageIndex};
+      return  {"list":articleAllList, 'total':2, 'pageIndex':pageIndex};
     }else{
       //正常列表数据 加载更多
       List<ArticleData> articleAllList = [];
@@ -59,14 +59,19 @@ class _TabPageViewState extends State<TabPageView> {
       await Future.delayed(Duration(seconds: 3), () {
         return [];
       });
-      Map<String, dynamic> result = {"list":articleAllList, 'total':3, 'pageIndex':pageIndex++};
+      Map<String, dynamic> result = {"list":articleAllList, 'total':2, 'pageIndex':pageIndex++};
       return result;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return /*Container(
+        child: Center(
+          child: Text(widget.title),
+        ),
+    );*/
+     Column(
       children: <Widget>[
         new Expanded(
           //child: listComp.ListRefresh(getIndexListData,makeCard,headerView)

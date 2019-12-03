@@ -8,9 +8,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class RefreshPage extends StatefulWidget {
 
-
+  // 模块item
   final renderItem;
+  //数据获取方法
   final requestApi;
+  //头部
   final headerView;
   //是否添加头部
   final bool isHaveHeader;
@@ -49,7 +51,7 @@ class _RefreshPageState extends State<RefreshPage> {
     super.initState();
   }
 
-  // ListView 触底 ，触发加载更多
+  // ListView 到底 ，触发加载更多
   Future _getMoreData() async {
     print("上拉加载更多,或者第一次加载");
     if (!isLoading && _hasMore) {
@@ -58,7 +60,7 @@ class _RefreshPageState extends State<RefreshPage> {
         setState(() => isLoading = true);
       }
       //if(_hasMore){ // 还有数据可以拉新
-      List newEntries = await mokeHttpRequest(false);
+      List newEntries = await makeHttpRequest(false);
       //if (newEntries.isEmpty) {
       _hasMore = (_pageIndex <= _pageTotal);
       if (this.mounted) {
@@ -73,7 +75,8 @@ class _RefreshPageState extends State<RefreshPage> {
     }
   }
 
-  Future<List> mokeHttpRequest(bool isRefresh) async {
+  //网络请求获取数据 isRefresh 是否为下拉刷新
+  Future<List> makeHttpRequest(bool isRefresh) async {
     if (widget.requestApi is Function) {
       Map listObj = new Map<String, dynamic>();
       if(isRefresh){
@@ -107,7 +110,7 @@ class _RefreshPageState extends State<RefreshPage> {
       if (items.length == 0) {
         return 1;
       }
-      ///如果有数据,因为部加载更多选项，需要对列表数据总数+1
+      ///如果有数据,加上外部加载更多选项，需要对列表数据总数+1
       return (items.length > 0) ? items.length + 1 : items.length;
     }
   }
@@ -124,17 +127,21 @@ class _RefreshPageState extends State<RefreshPage> {
       ///如果需要头部，并且数据不为0，当index =0 ，渲染头部
       return widget.headerView();
     } else if (!widget.isHaveHeader && items.length == 0) {
-      ///如果不需要头部，并且数据为0，渲染空页面
+      ///如果不需要头部，并且数据为0
       if(isLoading){
+        //正在刷新 渲染刷新页面
         return _buildIsLoading();
       }else{
+        //渲染空页面
         return _buildEmpty();
       }
     } else if(widget.isHaveHeader && items.length == 0){
       ///如果需要头部，并且数据为0，渲染loading 面
       if(isLoading){
+        //正在刷新 渲染刷新页面
         return _buildIsLoading();
       }else{
+        //渲染空页面
         return _buildEmpty();
       }
     } else {
@@ -167,7 +174,7 @@ class _RefreshPageState extends State<RefreshPage> {
   // 其实就是列表重置
   Future<Null> _handleRefresh() async {
     print("下拉刷新 ");
-    List newEntries = await mokeHttpRequest(true);
+    List newEntries = await makeHttpRequest(true);
     if (this.mounted) { //mounted == true  保证 当前widget 状态可以更新
       setState(() {
         items.clear();
@@ -179,13 +186,35 @@ class _RefreshPageState extends State<RefreshPage> {
     }
   }
 
-  ///空页面 empty
+  ///空页面 错误页面 empty error
   Widget  _buildEmpty()  {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height*0.85,
-      child: new Center(
-        child: new Text("空页面 可根据需求自行实现 empty"),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text("页面出错了！！"),
+          RaisedButton(
+            textColor: Colors.white,
+            color: Theme.of(context).primaryColor,
+            child: Text(
+                "重新加载"
+            ),
+            onPressed: (){
+              if (this.mounted) { //mounted == true  保证 当前widget 状态可以更新
+                setState(() {
+                  items.clear();
+                  isLoading = false;
+                  _hasMore = true;
+                  _pageIndex = 0;
+                });
+                _getMoreData();
+              }
+            },
+          )
+        ],
       ),
     );
   }
@@ -224,7 +253,7 @@ class _RefreshPageState extends State<RefreshPage> {
                  Row(
                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                    children: <Widget>[
-                     SpinKitCubeGrid(size: 55.0, color: Theme.of(context).primaryColor),
+                     SpinKitCircle(size: 55.0, color: Theme.of(context).primaryColor),
                    ],
                  ),
                 Padding(

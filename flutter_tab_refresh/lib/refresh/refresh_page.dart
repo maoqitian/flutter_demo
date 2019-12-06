@@ -62,7 +62,7 @@ class _RefreshPageState extends State<RefreshPage> {
       //if(_hasMore){ // 还有数据可以拉新
       List newEntries = await makeHttpRequest(false);
       //if (newEntries.isEmpty) {
-      _hasMore = (_pageIndex <= _pageTotal);
+      _hasMore = (_pageIndex < _pageTotal);
       if (this.mounted) {
         setState(() {
           items.addAll(newEntries);
@@ -81,10 +81,10 @@ class _RefreshPageState extends State<RefreshPage> {
       Map listObj = new Map<String, dynamic>();
       if(isRefresh){
         //下拉刷新
-        listObj = await widget.requestApi({'pageIndex': 0});
+        listObj = await widget.requestApi({'pageIndex': 0,'isRefresh':isRefresh});
       }else{
         //上拉加载更多
-        listObj = await widget.requestApi({'pageIndex': _pageIndex});
+        listObj = await widget.requestApi({'pageIndex': _pageIndex,'isRefresh':isRefresh});
       }
       _pageIndex = listObj['pageIndex'];
       _pageTotal = listObj['total'];

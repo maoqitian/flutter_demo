@@ -20,8 +20,11 @@ class TabPageView extends StatefulWidget {
   _TabPageViewState createState() => _TabPageViewState();
 }
 
-class _TabPageViewState extends State<TabPageView> {
+class _TabPageViewState extends State<TabPageView> with AutomaticKeepAliveClientMixin<TabPageView>{
 
+  // 加入AutomaticKeepAliveClientMixin 防止页面重绘
+  @override
+  bool get wantKeepAlive => true;
 
   Widget buildCard(index,data){
 
@@ -83,6 +86,7 @@ class _TabPageViewState extends State<TabPageView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return /*Container(
         child: Center(
           child: Text(widget.title),

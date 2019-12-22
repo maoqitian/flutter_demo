@@ -14,9 +14,19 @@ class RefreshPage extends StatefulWidget {
   final requestApi;
   //头部
   final headerView;
-  //是否添加头部
+  //是否添加头部 默认不添加
   final bool isHaveHeader;
-  const RefreshPage([this.requestApi, this.renderItem, this.headerView,this.isHaveHeader]) : super();
+  //是否支持下拉刷新 默认可以
+  final bool isCanRefresh;
+
+  const RefreshPage({@required this.requestApi,
+                     @required this.renderItem,
+                     this.headerView,
+                     this.isHaveHeader = false,
+                     this.isCanRefresh = true})
+                     : assert(requestApi is Function),
+                       assert(renderItem is Function),
+                      super();
 
   @override
   _RefreshPageState createState() => _RefreshPageState();
@@ -153,7 +163,7 @@ class _RefreshPageState extends State<RefreshPage> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
+    return widget.isCanRefresh ? RefreshIndicator(
       child: ListView.builder(
           ///保持ListView任何情况都能滚动，解决在RefreshIndicator的兼容问题。
           physics: const AlwaysScrollableScrollPhysics(),
@@ -167,6 +177,16 @@ class _RefreshPageState extends State<RefreshPage> {
       ),
       onRefresh: _handleRefresh,
       color: Theme.of(context).primaryColor, //指示器颜色
+    ) : ListView.builder(
+      ///不支持下拉刷新 则直接返回list view。
+
+      itemBuilder: (context,index){
+        return _getItem(index);
+      },
+      ///根据状态返回绘制 item 数量
+      itemCount: _getListCount(),
+      ///滑动监听
+      controller: _scrollController,
     );
   }
 

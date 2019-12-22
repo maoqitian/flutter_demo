@@ -96,7 +96,7 @@ class _TabPageViewState extends State<TabPageView> with AutomaticKeepAliveClient
       children: <Widget>[
         new Expanded(
           //child: listComp.ListRefresh(getIndexListData,makeCard,headerView)
-            child: listComp.RefreshPage(getPageListData,buildCard,null,false) //不需要头部
+            child: listComp.RefreshPage(requestApi: getPageListData,renderItem: buildCard) //不需要头部
         )
       ],
     );

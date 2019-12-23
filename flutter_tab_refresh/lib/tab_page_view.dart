@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tab_refresh/list_view_item.dart';
 import 'package:flutter_tab_refresh/refresh/refresh_page.dart' as listComp;
+import 'package:flutter_tab_refresh/refresh/refresh_page.dart';
 
 import 'bean/article_data.dart';
 
@@ -96,7 +97,7 @@ class _TabPageViewState extends State<TabPageView> with AutomaticKeepAliveClient
       children: <Widget>[
         new Expanded(
           //child: listComp.ListRefresh(getIndexListData,makeCard,headerView)
-            child: listComp.RefreshPage(requestApi: getPageListData,renderItem: buildCard) //不需要头部
+            child: RefreshPage(requestApi: getPageListData,renderItem: buildCard) //不需要头部
         )
       ],
     );

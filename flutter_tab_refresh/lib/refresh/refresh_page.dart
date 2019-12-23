@@ -16,14 +16,16 @@ class RefreshPage extends StatefulWidget {
   final headerView;
   //是否添加头部 默认不添加
   final bool isHaveHeader;
-  //是否支持下拉刷新 默认可以
+  //是否支持下拉刷新 默认可以下拉刷新
   final bool isCanRefresh;
-
+  //是否支持下拉加载更多 默认可以加载更多
+  final bool isCanLoadMore;
   const RefreshPage({@required this.requestApi,
                      @required this.renderItem,
                      this.headerView,
                      this.isHaveHeader = false,
-                     this.isCanRefresh = true})
+                     this.isCanRefresh = true,
+                     this.isCanLoadMore = true })
                      : assert(requestApi is Function),
                        assert(renderItem is Function),
                       super();
@@ -53,7 +55,7 @@ class _RefreshPageState extends State<RefreshPage> {
     _scrollController.addListener((){
       // 如果下拉的当前位置到scroll的最下面
       if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
-        if (this._getMoreData != null && _hasMore) {
+        if (this._getMoreData != null && _hasMore && widget.isCanLoadMore) {
           _getMoreData();
         }
       }
@@ -110,18 +112,33 @@ class _RefreshPageState extends State<RefreshPage> {
   ///实际上这里可以根据你的需要做更多的处理
   ///比如多个头部，是否需要空页面，是否需要显示加载更多。
   _getListCount() {
-    ///是否需要头部
-    if (widget.isHaveHeader) {
-      ///如果需要头部，用Item 0 的 Widget 作为ListView的头部
-      ///列表数量大于0时，因为头部和底部加载更多选项，需要对列表数据总数+2
-      return (items.length > 0) ? items.length + 2 : items.length + 1;
-    } else {
-      ///如果不需要头部，在没有数据时，固定返回数量1用于空页面呈现
-      if (items.length == 0) {
-        return 1;
+    if(widget.isCanLoadMore){ //支持加载更多
+      ///是否需要头部
+      if (widget.isHaveHeader) {
+        ///如果需要头部，用Item 0 的 Widget 作为ListView的头部
+        ///列表数量大于0时，因为头部和底部加载更多选项，需要对列表数据总数+2
+        return (items.length > 0) ? items.length + 2 : items.length + 1;
+      } else {
+        ///如果不需要头部，在没有数据时，固定返回数量1用于空页面呈现
+        if (items.length == 0) {
+          return 1;
+        }
+        ///如果有数据,加上外部加载更多选项，需要对列表数据总数+1
+        return (items.length > 0) ? items.length + 1 : items.length;
       }
-      ///如果有数据,加上外部加载更多选项，需要对列表数据总数+1
-      return (items.length > 0) ? items.length + 1 : items.length;
+    }else{
+      //没有下拉加载更多
+      if (widget.isHaveHeader) {
+        ///如果需要头部，用Item 0 的 Widget 作为ListView的头部
+        return (items.length > 0) ? items.length + 1 : items.length;
+      } else {
+        ///如果不需要头部，在没有数据时，固定返回数量1用于空页面呈现
+        if (items.length == 0) {
+          return 1;
+        }
+        /// 正常数据
+        return  items.length;
+      }
     }
   }
 

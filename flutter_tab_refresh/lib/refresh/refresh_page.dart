@@ -217,7 +217,7 @@ class _RefreshPageState extends State<RefreshPage> {
         items.clear();
         items.addAll(newEntries);
         isLoading = false;
-        _hasMore = true;
+        //_hasMore = true;
         return null;
       });
     }
